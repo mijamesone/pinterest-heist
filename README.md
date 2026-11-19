@@ -57,7 +57,7 @@ python3 tests/e2e/server.py &
 node tests/e2e/run.mjs
 ```
 
-Releases: push a tag like `v0.1.1` and GitHub Actions attaches the ZIP to a release.
+Releases: publish a release on GitHub with a new tag like `v0.1.1`, and GitHub Actions builds the ZIP and attaches it.
 
 ### Layout
 

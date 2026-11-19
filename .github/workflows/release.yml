@@ -1,10 +1,11 @@
 name: Release
-# Push a tag like v0.1.0 and this builds the extension and attaches a ready-to-load ZIP
-# to a GitHub release.
+# Publish a release on GitHub (Releases -> Draft a new release -> new tag like v0.1.0 ->
+# Publish) and this builds the extension and attaches a ready-to-load ZIP to it.
 on:
   push:
     tags: ['v*']
-  workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: write
