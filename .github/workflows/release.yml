@@ -1,0 +1,32 @@
+name: Release
+# Push a tag like v0.1.0 and this builds the extension and attaches a ready-to-load ZIP
+# to a GitHub release.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm test
+      - run: npm run zip
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: .output/*-chrome.zip
+          generate_release_notes: true
+          body: |
+            **Install:** download `pinterest-heist-*-chrome.zip` below, unzip it somewhere permanent, open `chrome://extensions` (Edge: `edge://extensions`), turn on Developer mode, click **Load unpacked** and pick the unzipped folder.
+            **Update:** unzip over the old folder and click ↻ on the extension.
+            Full guide: [docs/USER_GUIDE.md](https://github.com/${{ github.repository }}/blob/main/docs/USER_GUIDE.md)

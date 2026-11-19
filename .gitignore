@@ -1,0 +1,8 @@
+node_modules/
+.output/
+.wxt/
+dist/
+*.pem
+.DS_Store
+test-results/
+tests/e2e/.work/
